@@ -27,8 +27,7 @@ Language? _getLanguage(Locale locale) {
   Language? languageByLocaleCode = languageMap[localeCode];
   Language? languageByLangCode;
   if (languageByLocaleCode == null) {
-    languageByLangCode =
-    languageMap[locale.languageCode.toLowerCase()];
+    languageByLangCode = languageMap[locale.languageCode.toLowerCase()];
   }
   if (languageByLocaleCode != null) {
     language = languageByLocaleCode;
@@ -41,6 +40,7 @@ Language? _getLanguage(Locale locale) {
 Map<String, Language> languageMap = {};
 
 Map<String, Language> initLanguageMap(BuildContext context) {
+  languageMap.clear();
   if (languageMap.isEmpty) {
     for (final e in _l10nLug(context)) {
       languageMap[e["code"] ?? "other"] = Language.fromJson(e);
@@ -72,11 +72,7 @@ List<Map<String, String>> _l10nLug(BuildContext context) {
       "name": 'Updates pending',
       "nativeName": context.l10n!.updatePending
     },
-    {
-      "code": 'other',
-      "name": 'other langs',
-      "nativeName": context.l10n!.other
-    },
+    {"code": 'other', "name": 'other langs', "nativeName": context.l10n!.other},
     {"code": 'all', "name": 'All', "nativeName": context.l10n!.all},
   ];
 }

@@ -922,5 +922,6 @@
     "lastUsed": "Last Used",
     "updatePending": "Updates pending",
     "other": "Other",
-    "all": "All"
+    "all": "All",
+    "quickSearchDescription": "Long press on any interface"
 }

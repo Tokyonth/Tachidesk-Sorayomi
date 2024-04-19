@@ -853,6 +853,7 @@
   },
   "pinchToZoom": "捏合缩放",
   "quickSearch": "快速搜索",
+  "quickSearchDescription": "长按任意界面",
   "isTrueBlack": "纯黑",
   "localSourceLang": "本地来源",
   "installed": "已安装",

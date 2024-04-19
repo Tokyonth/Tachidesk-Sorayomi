@@ -29,6 +29,7 @@ class QuickSearchToggleTile extends HookConsumerWidget {
       controlAffinity: ListTileControlAffinity.trailing,
       secondary: const Icon(Icons.search_rounded),
       title: Text(context.l10n!.quickSearch),
+      subtitle: Text(context.l10n!.quickSearchDescription),
       onChanged: ref.read(quickSearchToggleProvider.notifier).update,
       value: ref.watch(quickSearchToggleProvider).ifNull(),
     );

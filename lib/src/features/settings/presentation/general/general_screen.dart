@@ -37,6 +37,7 @@ class GeneralScreen extends ConsumerWidget {
                 value: context.currentLocale,
                 onChange: (locale) {
                   ref.read(l10nProvider.notifier).update(locale);
+                  initLanguageMap(context);
                   Navigator.pop(context);
                 },
                 getOptionTitle: (locale) {

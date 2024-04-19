@@ -6,6 +6,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../constants/app_sizes.dart';
@@ -58,14 +59,17 @@ class BrowseScreen extends HookConsumerWidget {
           preferredSize: kCalculateAppBarBottomSize([true, showSearch.value]),
           child: Column(
             children: [
-              TabBar(
-                dividerColor: Colors.transparent,
-                isScrollable: context.isTablet,
-                controller: tabController,
-                tabs: [
-                  Tab(text: context.l10n!.sources),
-                  Tab(text: context.l10n!.extensions),
-                ],
+              Align(
+                alignment: Alignment.centerLeft,
+                child: TabBar(
+                  dividerColor: Colors.transparent,
+                  isScrollable: context.isTablet,
+                  controller: tabController,
+                  tabs: [
+                    Tab(text: context.l10n!.sources),
+                    Tab(text: context.l10n!.extensions),
+                  ],
+                ),
               ),
               if (showSearch.value)
                 Align(
@@ -89,6 +93,7 @@ class BrowseScreen extends HookConsumerWidget {
                           onClose: () => showSearch.value = (false),
                         ),
                 ),
+              const Gap(16),
             ],
           ),
         ),
