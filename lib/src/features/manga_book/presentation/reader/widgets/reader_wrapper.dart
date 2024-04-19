@@ -54,6 +54,7 @@ class ReaderWrapper extends HookConsumerWidget {
     required this.scrollDirection,
     this.showReaderLayoutAnimation = false,
   });
+
   final Widget child;
   final Manga manga;
   final Chapter chapter;
@@ -332,7 +333,12 @@ class ReaderWrapper extends HookConsumerWidget {
                       ),
                       margin: EdgeInsets.zero,
                       child: Padding(
-                        padding: KEdgeInsets.h16v8.size,
+                        padding: EdgeInsets.fromLTRB(
+                          16,
+                          8,
+                          16,
+                          MediaQuery.of(context).padding.bottom,
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
