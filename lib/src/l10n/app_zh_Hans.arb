@@ -850,5 +850,14 @@
   "readerSwipeChapterToggleDescription": "滑动切换章节",
   "@readerSwipeChapterToggleDescription": {
     "description": "Switch tile description for, toggle `swipe to change chapter` in reader screen"
-  }
+  },
+  "pinchToZoom": "捏合缩放",
+  "quickSearch": "快速搜索",
+  "isTrueBlack": "纯黑",
+  "localSourceLang": "本地来源",
+  "installed": "已安装",
+  "lastUsed": "最后使用",
+  "updatePending": "更新待定",
+  "other": "其他",
+  "all": "全部"
 }

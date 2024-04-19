@@ -10,6 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'constants/language_list.dart';
 import 'features/settings/presentation/appearance/widgets/app_theme_selector/app_theme_selector.dart';
 import 'features/settings/presentation/appearance/widgets/is_true_black/is_true_black_tile.dart';
 import 'features/settings/widgets/app_theme_mode_tile/app_theme_mode_tile.dart';
@@ -29,7 +30,10 @@ class Sorayomi extends ConsumerWidget {
     final isTrueBlack = ref.watch(isTrueBlackProvider);
     return MaterialApp.router(
       builder: FToastBuilder(),
-      onGenerateTitle: (context) => context.l10n!.appTitle,
+      onGenerateTitle: (context) {
+        initLanguageMap(context);
+        return context.l10n!.appTitle;
+      },
       debugShowCheckedModeBanner: false,
       theme: FlexThemeData.light(
         scheme: appScheme,

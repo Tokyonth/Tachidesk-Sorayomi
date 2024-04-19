@@ -4,53 +4,82 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import 'dart:ui';
+import 'package:flutter/widgets.dart';
 
 import '../features/browse_center/domain/language/language_model.dart';
+import '../utils/extensions/custom_extensions.dart';
 
 String getLanguageNameFormLocale(Locale locale) {
   String? displayName;
-  final localeCode = locale.toLanguageTag().toLowerCase();
-  if (languageMap[localeCode] != null) {
-    displayName = languageMap[localeCode]!.displayName;
-  } else if (languageMap[locale.languageCode.toLowerCase()] != null) {
-    displayName = languageMap[locale.languageCode.toLowerCase()]!.displayName;
-  }
+  displayName = _getLanguage(locale)?.displayName;
   return displayName ?? locale.toLanguageTag();
 }
 
 String getLanguageNameInEnFormLocale(Locale locale) {
   String? name;
-  final localeCode = locale.toLanguageTag().toLowerCase();
-  if (languageMap[localeCode] != null) {
-    name = languageMap[localeCode]!.name;
-  } else if (languageMap[locale.languageCode.toLowerCase()] != null) {
-    name = languageMap[locale.languageCode.toLowerCase()]!.name;
-  }
+  name = _getLanguage(locale)?.name;
   return name ?? locale.toLanguageTag();
 }
 
-final languageMap = {
-  for (final e in customLanguageList) e['code'] ?? "other": Language.fromJson(e)
-};
+Language? _getLanguage(Locale locale) {
+  Language? language;
+  final localeCode = locale.toLanguageTag().toLowerCase();
+  Language? languageByLocaleCode = languageMap[localeCode];
+  Language? languageByLangCode;
+  if (languageByLocaleCode == null) {
+    languageByLangCode =
+    languageMap[locale.languageCode.toLowerCase()];
+  }
+  if (languageByLocaleCode != null) {
+    language = languageByLocaleCode;
+  } else if (languageByLangCode != null) {
+    language = languageByLangCode;
+  }
+  return language;
+}
 
-const customLanguageList = [
-  ...languageList,
-  {
-    "code": 'localsourcelang',
-    "name": 'Local source',
-    "nativeName": 'Local source'
-  },
-  {"code": 'installed', "name": 'Installed', "nativeName": 'Installed'},
-  {"code": "lastUsed", "name": "Last Used", "nativeName": "Last Used"},
-  {
-    "code": 'update',
-    "name": 'Updates pending',
-    "nativeName": 'Updates pending'
-  },
-  {"code": 'other', "name": 'other langs', "nativeName": 'Other'},
-  {"code": 'all', "name": 'All', "nativeName": 'All'},
-];
+Map<String, Language> languageMap = {};
+
+Map<String, Language> initLanguageMap(BuildContext context) {
+  if (languageMap.isEmpty) {
+    for (final e in _l10nLug(context)) {
+      languageMap[e["code"] ?? "other"] = Language.fromJson(e);
+    }
+  }
+  return languageMap;
+}
+
+List<Map<String, String>> _l10nLug(BuildContext context) {
+  return [
+    ...languageList,
+    {
+      "code": 'localsourcelang',
+      "name": 'Local source',
+      "nativeName": context.l10n!.localSourceLang
+    },
+    {
+      "code": 'installed',
+      "name": 'Installed',
+      "nativeName": context.l10n!.installed
+    },
+    {
+      "code": "lastUsed",
+      "name": 'Last Used',
+      "nativeName": context.l10n!.lastUsed
+    },
+    {
+      "code": 'update',
+      "name": 'Updates pending',
+      "nativeName": context.l10n!.updatePending
+    },
+    {
+      "code": 'other',
+      "name": 'other langs',
+      "nativeName": context.l10n!.other
+    },
+    {"code": 'all', "name": 'All', "nativeName": context.l10n!.all},
+  ];
+}
 
 const languageList = [
   {"code": 'en', "name": 'English', "nativeName": 'English'},

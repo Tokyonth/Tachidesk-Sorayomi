@@ -39,8 +39,12 @@ class GeneralScreen extends ConsumerWidget {
                   ref.read(l10nProvider.notifier).update(locale);
                   Navigator.pop(context);
                 },
-                getOptionTitle: getLanguageNameFormLocale,
-                getOptionSubtitle: getLanguageNameInEnFormLocale,
+                getOptionTitle: (locale) {
+                  return getLanguageNameFormLocale(locale);
+                },
+                getOptionSubtitle: (locale) {
+                  return getLanguageNameInEnFormLocale(locale);
+                },
               ),
             ),
           ),

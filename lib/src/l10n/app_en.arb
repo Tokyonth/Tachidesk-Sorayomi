@@ -916,5 +916,11 @@
     "webUI": "Open in WEB",
     "webView": "Web View",
     "whatsNew": "What's New?",
-    "yesterday": "Yesterday"
+    "yesterday": "Yesterday",
+    "localSourceLang": "Local source",
+    "installed": "Installed",
+    "lastUsed": "Last Used",
+    "updatePending": "Updates pending",
+    "other": "Other",
+    "all": "All"
 }

@@ -13,6 +13,7 @@ import '../../../../../constants/enum.dart';
 import '../../../../../routes/router_config.dart';
 import '../../../../../utils/extensions/custom_extensions.dart';
 import '../../../../../widgets/server_image.dart';
+import '../../../domain/language/language_model.dart';
 import '../../../domain/source/source_model.dart';
 import '../controller/source_controller.dart';
 
@@ -40,9 +41,7 @@ class SourceListTile extends ConsumerWidget {
         ),
       ),
       title: Text(source.name ?? ""),
-      subtitle: (source.lang?.displayName).isNotBlank
-          ? Text(source.lang?.displayName ?? "")
-          : null,
+      subtitle: Text(_handleName(source.lang, context)),
       trailing: (source.supportsLatest.ifNull())
           ? TextButton(
               onPressed: () async {
@@ -56,5 +55,18 @@ class SourceListTile extends ConsumerWidget {
             )
           : null,
     );
+  }
+
+  String _handleName(Language? lang, BuildContext context) {
+    String name;
+    if (lang != null) {
+      name = lang.displayName ?? "";
+    } else {
+      name = "";
+    }
+    if (name == "localsourcelang") {
+      name = context.l10n!.localSourceLang;
+    }
+    return name;
   }
 }
